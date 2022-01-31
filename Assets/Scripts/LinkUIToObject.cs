@@ -5,14 +5,20 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class LinkUIToObject : MonoBehaviour
 {
-    public GameObject parent;
-
     [SerializeField]
-    private Vector2 offset;
+    private Vector3 offset;
+
+    private RectTransform rectTransform;
+
+    void Awake()
+    {
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Camera.main.WorldToScreenPoint(parent.transform.position) + new Vector3(offset.x, offset.y, 0f);
+        rectTransform.rotation = Camera.main.transform.rotation;
+        rectTransform.localPosition = offset;
     }
 }
